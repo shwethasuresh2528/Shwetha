@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodShare | Food Donation Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home"><span class="brand-icon">♻</span><span>Food<span class="brand-accent">Share</span><small>DONATE • CONNECT • CARE</small></span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <nav id="mainNav">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#dashboard" class="nav-link">Dashboard</a>
+      <a href="#donate" class="nav-link">Donate Food</a>
+      <a href="#available" class="nav-link">Donations</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">☾ <span>Dark mode</span></button>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <span class="eyebrow">SMALL ACTS. BIG IMPACT.</span>
+        <h1>Good food deserves<br><span>a second chance.</span></h1>
+        <p>Connect surplus food with people and communities who need it. Record donations, track collections, and make every meal count.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#donate">＋ Donate food</a>
+          <a class="btn btn-light" href="#available">Explore donations →</a>
+        </div>
+        <div class="hero-note"><span class="pulse-dot"></span> Every safe, timely donation can make a difference.</div>
+      </div>
+      <div class="hero-art" aria-label="Illustration of food donation">
+        <div class="art-circle"></div><div class="art-leaf leaf-one">✦</div><div class="art-leaf leaf-two">✿</div>
+        <div class="food-emoji">🥗</div><div class="art-badge badge-top">🌱 Reduce waste</div><div class="art-badge badge-bottom">♡ Share kindness</div>
+      </div>
+    </section>
+
+    <section class="impact-strip">
+      <div><span class="impact-icon">🌍</span><span><b>Purpose-driven</b><small>Food rescue coordination</small></span></div>
+      <div><span class="impact-icon">🤝</span><span><b>Community-first</b><small>Donors and receivers</small></span></div>
+      <div><span class="impact-icon">⏱️</span><span><b>Time-aware</b><small>Collection deadlines</small></span></div>
+    </section>
+
+    <section class="section" id="dashboard">
+      <div class="section-heading">
+        <div><span class="eyebrow">YOUR IMPACT AT A GLANCE</span><h2>Donation dashboard</h2><p>Track donations and food collection activity in one place.</p></div>
+        <button class="btn btn-outline" id="exportBtn">↓ Export CSV</button>
+      </div>
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>Total donations</span><span class="stat-icon green">♧</span></div><strong id="totalDonations">0</strong><small>All recorded donations</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Available</span><span class="stat-icon orange">◷</span></div><strong id="availableCount">0</strong><small>Waiting for a receiver</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Completed</span><span class="stat-icon blue">✓</span></div><strong id="completedCount">0</strong><small>Marked as collected</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Food servings</span><span class="stat-icon purple">♡</span></div><strong id="totalServings">0</strong><small>Servings listed in donations</small></article>
+      </div>
+      <div class="impact-banner"><div class="impact-big">💚</div><div><b>Every donation tells a story of care.</b><p>FoodShare helps organize surplus food information so it can be collected in time.</p></div><div class="impact-total"><strong id="completedServings">0</strong><span>servings in completed donations</span></div></div>
+    </section>
+
+    <section class="section donate-section" id="donate">
+      <div class="section-heading">
+        <div><span class="eyebrow">MAKE A DIFFERENCE</span><h2 id="formHeading">Add a food donation</h2><p>Share accurate details so a receiver can plan collection.</p></div>
+      </div>
+      <div class="form-layout">
+        <form id="donationForm" class="donation-form">
+          <input type="hidden" id="editId">
+          <div class="form-grid">
+            <div class="field"><label for="foodName">Food name <span>*</span></label><input id="foodName" maxlength="80" placeholder="e.g. Vegetable rice" required></div>
+            <div class="field"><label for="category">Food category <span>*</span></label><select id="category" required><option value="">Choose category</option><option>Cooked Food</option><option>Fruits & Vegetables</option><option>Bakery Products</option><option>Packaged Food</option><option>Other</option></select></div>
+            <div class="field"><label for="quantity">Quantity (servings) <span>*</span></label><input type="number" id="quantity" min="1" max="100000" placeholder="e.g. 25" required></div>
+            <div class="field"><label for="donorName">Donor / organization <span>*</span></label><input id="donorName" maxlength="80" placeholder="e.g. ABC Restaurant" required></div>
+            <div class="field"><label for="location">Pickup location <span>*</span></label><input id="location" maxlength="120" placeholder="e.g. Gandhipuram, Coimbatore" required></div>
+            <div class="field"><label for="deadline">Safe collection deadline <span>*</span></label><input type="datetime-local" id="deadline" required><small>Enter a future deadline suitable for safe collection.</small></div>
+            <div class="field full"><label for="notes">Additional notes (optional)</label><textarea id="notes" rows="3" maxlength="300" placeholder="Packaging, pickup instructions, or other details"></textarea></div>
+          </div>
+          <div class="form-actions"><button type="submit" class="btn btn-primary" id="submitBtn">Publish donation →</button><button type="button" class="btn btn-light hidden" id="cancelEditBtn">Cancel edit</button><span class="required-note">* Required fields</span></div>
+        </form>
+        <aside class="safety-card"><div class="safety-icon">🛡️</div><h3>Food safety matters</h3><p>Only list food that can be safely handled and collected within the stated deadline.</p><ul><li>Keep food covered and protected.</li><li>Provide honest quantity and food details.</li><li>Do not list spoiled or unsafe food.</li><li>Arrange prompt collection and safe transport.</li></ul><div class="safety-foot">FoodShare is a coordination prototype, not a food-safety certification service.</div></aside>
+      </div>
+    </section>
+
+    <section class="section" id="available">
+      <div class="section-heading">
+        <div><span class="eyebrow">COMMUNITY FOOD BOARD</span><h2>Food donations</h2><p>Search, filter, edit, or update donation status.</p></div>
+        <span class="results-pill" id="resultsCount">0 donations</span>
+      </div>
+      <div class="filters">
+        <div class="search-box"><span>⌕</span><input type="search" id="searchInput" placeholder="Search food, donor, or location…"></div>
+        <select id="categoryFilter" aria-label="Filter by category"><option value="">All categories</option><option>Cooked Food</option><option>Fruits & Vegetables</option><option>Bakery Products</option><option>Packaged Food</option><option>Other</option></select>
+        <select id="statusFilter" aria-label="Filter by status"><option value="">All statuses</option><option>Available</option><option>Requested</option><option>Completed</option></select>
+        <select id="locationFilter" aria-label="Filter by location"><option value="">All locations</option></select>
+        <button class="btn btn-light" id="clearFiltersBtn">Clear filters</button>
+      </div>
+      <div class="donation-grid" id="foodList"></div>
+      <div class="empty-state hidden" id="emptyState"><div>🥣</div><h3>No donations found</h3><p>Try changing your search or add a new donation.</p><a class="btn btn-primary" href="#donate">Add donation</a></div>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#home"><span class="brand-icon">♻</span><span>Food<span class="brand-accent">Share</span><small>DONATE • CONNECT • CARE</small></span></a><p>Reducing food waste, one thoughtful donation at a time.</p><small>Java Web Development Internship • Frontend Prototype</small></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>
